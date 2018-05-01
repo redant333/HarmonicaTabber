@@ -1,42 +1,4 @@
 (function () {
-    describe("isValidTab", function () {
-        [
-            "7-",
-            "(3+)",
-            " 5-'",
-            " 8+\"'"
-        ].forEach(function (validTab) {
-
-            it("should return true for a valid tab " + validTab + " with default formatting", function () {
-                expect(harptab.isValidTab(validTab)).toBe(true);
-            });
-
-        });
-
-        it("should return true for a valid tab with custom formatting", function () {
-            let customFormatting = {
-                blow: "+#",
-                draw: harptab.defaultFormatting.blow,
-                halfStepBend: harptab.defaultFormatting,
-                fullStepBend: harptab.defaultFormatting,
-                oneAndHalfStepBend: harptab.defaultFormatting,
-                overblow: harptab.defaultFormatting,
-                overdraw: "[#]"
-            };
-
-            let validTab = "[+6]";
-            expect(harptab.isValidTab(validTab, customFormatting)).toBe(true);
-        });
-
-        it("should return false for an invalid tab", function () {
-            const invalidTab = "invalid";
-            let valid = harptab.isValidTab(invalidTab);
-
-            expect(valid).toBe(false);
-        });
-
-    });
-
     describe("isValidNote", function () {
         [
             "C",
