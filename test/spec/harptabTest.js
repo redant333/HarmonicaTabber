@@ -1,27 +1,33 @@
 (function () {
     describe("isValidNote", function () {
         [
-            "C",
-            "c",
-            "D#",
-            "Db",
-            "e#",
-            "eb"
+            "C0",
+            "c5",
+            "D#6",
+            "Db7",
+            "e#8",
+            "eb8"
         ].forEach(function (validNote) {
-            it("should return true for valid uppercase note " + validNote, function () {
-                let validUppercaseNote = "C";
-                let valid = harptab.isValidNote(validUppercaseNote);
+            it("should return true for valid note " + validNote, function () {
+                let valid = harptab.isValidNote(validNote);
 
                 expect(valid).toBe(true);
             });
         });
 
-        it("should return false for invalid note", function () {
-            let invalidNote = "X";
-            let valid = harptab.isValidNote(invalidNote);
+        [
+            "C9",
+            "cB",
+            "H",
+            "C#0C"
+        ].forEach(function (invalidNote) {
+            it("should return false for invalid note " + invalidNote, function () {
+                let valid = harptab.isValidNote(invalidNote);
 
-            expect(valid).toBe(false);
+                expect(valid).toBe(false);
+            });
         });
+        
     });
 
     describe("fromNoteToTab", function () {
@@ -32,13 +38,21 @@
             expect(tab).toBe(null);
         });
 
+        it("should return null for unplayable note", function() {
+            // B harmonica has no A in the lowest scale
+            let tab = harptab.fromNoteToTab("A",0,"B");
+
+            expect(tab).toBe(null);
+        });
+
         [
             ["C", 0, "C", "1+"],
-            ["d", 1, "C", "1-"],
-            ["A", 2, "F#", "(8+)"],
-            ["Bb", 0, "C", "3-'"],
-            ["a", 0, "C", "3-\""],
-            ["ab", 0, "C", "3-\"'"]
+            ["E", 2, "B", "5-"],
+            ["G", 2, "Db", "9+'"],
+            ["E", 1, "G", "3-\""],
+            ["D#", 1, "G", "3-\"'"],
+            ["Db", 3, "C", "(10-)"],
+            ["A", 0, "F#", "(1+)"]
         ].forEach(function ([note, scale, key, expected]) {
             it("should return " + expected + " for parameters (" + note + ", " + scale + ", " + key + ") with default formatting", function () {
                 let tab = harptab.fromNoteToTab(note, scale, key);
