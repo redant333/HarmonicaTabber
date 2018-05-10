@@ -653,11 +653,11 @@ const harptab = (function () {
      * Convert note to harmonica tab.
      * 
      * @param {string} note Note to be converted (e.g. c, C, c#, Db).
-     * @param {any} octave Octave of the harmonica on which to put the note.
+     * @param {integer} octave Octave of the harmonica on which to put the note.
      *                     0 corresponds to the lowest octave harmonica of the 
      *                     given key can play.
-     * @param {any} key Major key of harmonica (e.g. C, Db, F#)
-     * @param {any} formatting Formatting of the tabs. If not provided, defaultFormatting is
+     * @param {string} key Major key of harmonica (e.g. C, Db, F#)
+     * @param {object} formatting Formatting of the tabs. If not provided, defaultFormatting is
      *                         is used. See defaultFormatting comment for more details.
      * @returns 
      */
@@ -731,11 +731,43 @@ const harptab = (function () {
     }
 
     /**
+     * Get list of notes harmonica of tha given key can play in
+     * given octave.
+     * 
+     * @param {string} key Major key of harmonica (e.g. C, Db, F#).
+     * @param {integer} octave Octave for which to return notes. 0 corresponds
+     *                     to lowest octave harmonica of the given key can play.
+     * @returns Array of playable notes. Accidentals will be represented as sharps.
+     */
+    function getPlayableNotes(key,octave) {
+        const keyObject = noteTabDict[key];
+
+        if(!keyObject) {
+            return null;
+        }
+
+        const notes = [];
+
+        Object.keys(keyObject).forEach(function(note) {
+            const noteOctave = note.slice(-1);
+            const noteWithoutOctave = note.slice(0, note.length - 1).toUpperCase();
+
+            // return non flat notes of the specified octave
+            if(noteOctave == octave && noteWithoutOctave[1] != "B") {
+                notes.push(noteWithoutOctave);
+            }
+        });
+
+        return notes;
+    }
+
+    /**
      * Return the module object
      */
     return {
         fromNoteToTab: fromNoteToTab,
         isValidNote: isValidNote,
-        defaultFormatting: defaultFormatting
+        defaultFormatting: defaultFormatting,
+        getPlayableNotes: getPlayableNotes
     };
 }());

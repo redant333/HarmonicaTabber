@@ -27,7 +27,7 @@
                 expect(valid).toBe(false);
             });
         });
-        
+
     });
 
     describe("fromNoteToTab", function () {
@@ -38,9 +38,9 @@
             expect(tab).toBe(null);
         });
 
-        it("should return null for unplayable note", function() {
+        it("should return null for unplayable note", function () {
             // B harmonica has no A in the lowest octave
-            let tab = harptab.fromNoteToTab("A",0,"B");
+            let tab = harptab.fromNoteToTab("A", 0, "B");
 
             expect(tab).toBe(null);
         });
@@ -78,6 +78,35 @@
             let tab = harptab.fromNoteToTab(note, octave, key, customFormatting);
 
             expect(tab).toBe("[-10]");
+        });
+    });
+
+    describe("getPlayableNotes", function () {
+        it("should return null for invalid key", function () {
+            const invalidKey = "X#";
+            const validOctave = 0;
+
+            let notes = harptab.getPlayableNotes(invalidKey, validOctave);
+
+            expect(notes).toBe(null);
+        });
+
+        it("should return empty array for invalid octave", function () {
+            const validKey = "C";
+            const invalidOctave = 20;
+
+            let notes = harptab.getPlayableNotes(validKey, invalidOctave);
+
+            expect(notes).toEqual([]);
+        });
+
+        it("should return valid notes for valid parameters", function () {
+            const key = "F#";
+            const octave = 0;
+            const expectedNotes = ["F#", "G", "G#", "A", "A#", "B"];
+
+            const notes = harptab.getPlayableNotes(key, octave);
+            expect(notes).toEqual(expectedNotes);
         });
     });
 }());
