@@ -1,4 +1,9 @@
 const harptab = (function () {
+    /**
+     * An example of tab formatting object. For blow and draw,
+     * # is replaced with hole number and for the rest, # is
+     * replaced with blow/draw formatted string.
+     */
     const defaultFormatting = {
         blow: "#+",
         draw: "#-",
@@ -23,6 +28,10 @@ const harptab = (function () {
         NONE: 6
     };
 
+    /**
+     * Note that this dictionary is created with key_generator/generator.html
+     * Probably not a good idea to modify it manually.
+     */
     const noteTabDict = {
         "C": {
             "c0": { hole: 1, blow: 1, modifier: 6 },
@@ -640,7 +649,18 @@ const harptab = (function () {
             "c4": { hole: 10, blow: 2, modifier: 5 },
         },
     }
-
+    /**
+     * Convert note to harmonica tab.
+     * 
+     * @param {string} note Note to be converted (e.g. c, C, c#, Db).
+     * @param {any} scale Scale on the harmonica on which to put the note.
+     *                    0 corresponds to the lowest scale harmonica of the given
+     *                    key can play.
+     * @param {any} key Major scale of harmonica (e.g. C, Db, F#)
+     * @param {any} formatting Formatting of the tabs. If not provided, defaultFormatting is
+     *                         is used. See defaultFormatting comment for more details.
+     * @returns 
+     */
     function fromNoteToTab(note, scale, key, formatting) {
         let keyObj = noteTabDict[key];
         if (!keyObj) {
@@ -695,6 +715,13 @@ const harptab = (function () {
     };
 
     const validNoteRegex = new RegExp("^[a-gA-G][#b]?[0-8]$");    
+    /**
+     * Check if given string is valid note. Valid notes are uppercase
+     * or lowercase strings in scientific pitch notation (e.g. c0, C0, Cb0).
+     * 
+     * @param {string} note Note whose validity needs to be checked.
+     * @returns true if note is valid note, false otherwise.
+     */
     function isValidNote(note) {
         if (note) {
             return validNoteRegex.test(note);
@@ -703,6 +730,9 @@ const harptab = (function () {
         return false;
     }
 
+    /**
+     * Return the module object
+     */
     return {
         fromNoteToTab: fromNoteToTab,
         isValidNote: isValidNote,
