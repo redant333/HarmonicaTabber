@@ -13,7 +13,7 @@ function generateHarmonicaKey(key) {
         NONE: 6
     };
 
-    const fullScale = [
+    const fullOctave = [
         ["C"],
         ["C#", "Db"],
         ["D"],
@@ -30,12 +30,12 @@ function generateHarmonicaKey(key) {
 
     // Creates rows for all aliases of the note
     function createNoteRows(note, hole, blow, modifier) {
-        let scale = Math.floor(note / fullScale.length);
-        let noteWithoutScale = note % fullScale.length;
+        let octave = Math.floor(note / fullOctave.length);
+        let noteWithoutOctave = note % fullOctave.length;
         let ret = '';
 
-        fullScale[noteWithoutScale].forEach((noteAlias) => {
-            ret += '"' + noteAlias.toLowerCase() + scale + '":{'
+        fullOctave[noteWithoutOctave].forEach((noteAlias) => {
+            ret += '"' + noteAlias.toLowerCase() + octave + '":{'
             ret += 'hole:' + hole + ',';
             ret += 'blow:' + blow + ',';
             ret += 'modifier:' + modifier + '},<br/>';
@@ -45,8 +45,8 @@ function generateHarmonicaKey(key) {
 
     // Determine the index of the first note in key
     let firstNote = -1;
-    for (let i = 0; i < fullScale.length; i++) {
-        if(fullScale[i].includes(key)) {
+    for (let i = 0; i < fullOctave.length; i++) {
+        if(fullOctave[i].includes(key)) {
             firstNote = i;
             break;
         }

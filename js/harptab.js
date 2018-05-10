@@ -653,21 +653,21 @@ const harptab = (function () {
      * Convert note to harmonica tab.
      * 
      * @param {string} note Note to be converted (e.g. c, C, c#, Db).
-     * @param {any} scale Scale on the harmonica on which to put the note.
-     *                    0 corresponds to the lowest scale harmonica of the given
-     *                    key can play.
-     * @param {any} key Major scale of harmonica (e.g. C, Db, F#)
+     * @param {any} octave Octave of the harmonica on which to put the note.
+     *                     0 corresponds to the lowest octave harmonica of the 
+     *                     given key can play.
+     * @param {any} key Major key of harmonica (e.g. C, Db, F#)
      * @param {any} formatting Formatting of the tabs. If not provided, defaultFormatting is
      *                         is used. See defaultFormatting comment for more details.
      * @returns 
      */
-    function fromNoteToTab(note, scale, key, formatting) {
+    function fromNoteToTab(note, octave, key, formatting) {
         let keyObj = noteTabDict[key];
         if (!keyObj) {
             return null;
         }
 
-        let lowerCaseNote = (note + scale).toLowerCase();
+        let lowerCaseNote = (note + octave).toLowerCase();
         let noteObj = keyObj[lowerCaseNote];
         if (!noteObj) {
             return null;

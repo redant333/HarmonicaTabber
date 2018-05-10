@@ -39,7 +39,7 @@
         });
 
         it("should return null for unplayable note", function() {
-            // B harmonica has no A in the lowest scale
+            // B harmonica has no A in the lowest octave
             let tab = harptab.fromNoteToTab("A",0,"B");
 
             expect(tab).toBe(null);
@@ -53,9 +53,9 @@
             ["D#", 1, "G", "3-\"'"],
             ["Db", 3, "C", "(10-)"],
             ["A", 0, "F#", "(1+)"]
-        ].forEach(function ([note, scale, key, expected]) {
-            it("should return " + expected + " for parameters (" + note + ", " + scale + ", " + key + ") with default formatting", function () {
-                let tab = harptab.fromNoteToTab(note, scale, key);
+        ].forEach(function ([note, octave, key, expected]) {
+            it("should return " + expected + " for parameters (" + note + ", " + octave + ", " + key + ") with default formatting", function () {
+                let tab = harptab.fromNoteToTab(note, octave, key);
                 expect(tab).toBe(expected);
             });
         });
@@ -72,10 +72,10 @@
             };
 
             let note = "G";
-            let scale = 3;
+            let octave = 3;
             let key = "F#";
 
-            let tab = harptab.fromNoteToTab(note, scale, key, customFormatting);
+            let tab = harptab.fromNoteToTab(note, octave, key, customFormatting);
 
             expect(tab).toBe("[-10]");
         });
