@@ -20,6 +20,7 @@
 - Lists
 - Code
 - Tables
+- Collapsibles
 - Spacing
 - Utilities
 - Clearing
@@ -361,6 +362,72 @@ th:last-child,
 td:last-child {
   padding-right: 0; }
 
+/* Collapsibles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="checkbox"].collapsible-toggle {
+  display: none;
+}
+
+.collapsible-content {
+  max-height: 0px;
+  overflow: hidden;
+}
+
+.collapsible-toggle:checked+.collapsible-label+.collapsible-content {
+    max-height: fit-content;
+}
+
+.collapsible-label::before {
+    margin-right: 1ch;
+}
+
+.collapsible-label::before {
+    content: '+';
+}
+
+.collapsible-toggle:checked+.collapsible-label::before {
+    content: '-';
+}
+
+.collapsible-label {
+    /* Safari 3.1+ */
+    -webkit-user-select: none;
+    /* Firefox 2+ */
+    -moz-user-select: none;
+    /* IE 10+ */
+    -ms-user-select: none;
+    /* Standard syntax */
+    user-select: none;
+    color: var(--secondary-foreground);
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: var(--secondary-background);
+    border-radius: 4px;
+    border: 1px solid var(--secondary-border);
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 6px 10px;
+}
+
+.collapsible-label:hover {
+    border: 1px solid var(--secondary-highlight-border);
+    background-color: var(--secondary-highlight-background);
+    color: var(--secondary-highlight-foreground);
+}
+
+.collapsible-toggle:checked+.collapsible-label {
+    background-color: var(--primary-background);
+    border-color: var(--primary-border);
+    color: var(--primary-foreground);
+}
+
+.collapsible-toggle:checked+.collapsible-label:hover {
+  background-color: var(--primary-highlight-background);
+  border-color: var(--primary-highlight-border);
+  color: var(--primary-highlight-foreground);
+}
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
