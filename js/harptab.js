@@ -762,12 +762,30 @@ const harptab = (function () {
     }
 
     /**
+     * Convert a string that contains non-case-sensitive notes (e.g. C, c#, Db)
+     * into harmonica tabs.
+     * 
+     * @param {string} notes String that contains notes that need to be translated
+     * @param {string} harmonicaKey Key of the harmonica for which to generate tabs
+     * 
+     * @returns Notes converted into tabs for the specified harmonica key.
+     */
+    function fromOctavelessNotesToTabs(notes, harmonicaKey) {
+        const validNoteRegex = /[a-gA-G][#b]?/g;
+
+        return notes.replace(validNoteRegex, function (match) {
+            return fromNoteToTab(match.toLowerCase(), 1, harmonicaKey.toUpperCase(), defaultFormatting);
+        });
+    }
+
+    /**
      * Return the module object
      */
     return {
         fromNoteToTab: fromNoteToTab,
         isValidNote: isValidNote,
         defaultFormatting: defaultFormatting,
-        getPlayableNotes: getPlayableNotes
+        getPlayableNotes: getPlayableNotes,
+        fromOctavelessNotesToTabs: fromOctavelessNotesToTabs
     };
 }());

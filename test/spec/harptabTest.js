@@ -109,4 +109,26 @@
             expect(notes).toEqual(expectedNotes);
         });
     });
+
+    describe("fromOctavelessNotesToTabs", function () {
+        it("should return an empty string for an empty string", function () {
+            const key = "C";
+            const notes = "";
+            const expectedTabs = "";
+
+            let tabs = harptab.fromOctavelessNotesToTabs(notes, key);
+
+            expect(tabs).toEqual(expectedTabs);
+        });
+
+        it("should properly convert whole scale with sharps", function () {
+            const key = "C";
+            const notes = "C c# D d# e F f# G G# a A# B"
+            const expectedTabs = "4+ 4-' 4- (4+) 5+ 5- (5+) 6+ 6-' 6- (6+) 7-"
+
+            let tabs = harptab.fromOctavelessNotesToTabs(notes, key);
+
+            expect(tabs).toEqual(expectedTabs);
+        });
+    });
 }());
