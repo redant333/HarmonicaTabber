@@ -714,53 +714,6 @@ const harptab = (function () {
         return ret;
     };
 
-    const validNoteRegex = new RegExp("^[a-gA-G][#b]?[0-8]$");    
-    /**
-     * Check if given string is valid note. Valid notes are uppercase
-     * or lowercase strings in scientific pitch notation (e.g. c0, C0, Cb0).
-     * 
-     * @param {string} note Note whose validity needs to be checked.
-     * @returns true if note is valid note, false otherwise.
-     */
-    function isValidNote(note) {
-        if (note) {
-            return validNoteRegex.test(note);
-        }
-
-        return false;
-    }
-
-    /**
-     * Get list of notes harmonica of tha given key can play in
-     * given octave.
-     * 
-     * @param {string} key Major key of harmonica (e.g. C, Db, F#).
-     * @param {integer} octave Octave for which to return notes. 0 corresponds
-     *                     to lowest octave harmonica of the given key can play.
-     * @returns Array of playable notes. Accidentals will be represented as sharps.
-     */
-    function getPlayableNotes(key,octave) {
-        const keyObject = noteTabDict[key];
-
-        if(!keyObject) {
-            return null;
-        }
-
-        const notes = [];
-
-        Object.keys(keyObject).forEach(function(note) {
-            const noteOctave = note.slice(-1);
-            const noteWithoutOctave = note.slice(0, note.length - 1).toUpperCase();
-
-            // return non flat notes of the specified octave
-            if(noteOctave == octave && noteWithoutOctave[1] != "B") {
-                notes.push(noteWithoutOctave);
-            }
-        });
-
-        return notes;
-    }
-
     /**
      * Convert a string that contains non-case-sensitive notes (e.g. C, c#, Db)
      * into harmonica tabs.
@@ -783,9 +736,7 @@ const harptab = (function () {
      */
     return {
         fromNoteToTab: fromNoteToTab,
-        isValidNote: isValidNote,
         defaultFormatting: defaultFormatting,
-        getPlayableNotes: getPlayableNotes,
         fromOctavelessNotesToTabs: fromOctavelessNotesToTabs
     };
 }());
