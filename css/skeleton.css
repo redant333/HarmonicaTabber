@@ -430,28 +430,6 @@ input[type="checkbox"].collapsible-toggle {
   color: var(--primary-highlight-foreground);
 }
 
-/* Header/Footer
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.header {
-  left: 0;
-  right: 0;
-  padding: 5px;
-  padding-left: 15%;
-  margin-bottom: 1em;
-  background-color: var(--primary-background);
-  color: var(--primary-foreground);
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-left: 20px;
-  color: var(--primary-foreground);
-  background-color: var(--primary-background);
-}
-
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 button,
