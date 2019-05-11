@@ -27,7 +27,7 @@
 /* ------------------ */
 
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -36,4 +36,13 @@
     background-color: var(--primary-background);
     color: #8f8f8f;
     font-size: 0.85em;
+}
+
+body {
+    min-height: 100vh;
+    position:relative;
+}
+
+#main-container {
+    padding-bottom: 3rem;
 }
