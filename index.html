@@ -41,8 +41,27 @@
             </div>
         </div>
         <div class="row">
-            <div style="text-align: center">
-                <button class="button-primary" onclick="translateNotes('toTranslate', 'translated')">Translate</button>
+            <div class="six columns">
+                <label for="key">Harmonica key</label>
+                <select id="key" class="u-full-width">
+                    <option value="G">G</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A">A</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                    <option value="C" selected>C</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="F#">F#</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns">
+                <button class="u-pull-right button-primary" onclick="translateNotes('toTranslate', 'translated', 'key')">Translate</button>
             </div>
         </div>
     </div>
