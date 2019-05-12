@@ -727,7 +727,7 @@ const harptab = (function () {
         const validNoteRegex = /[a-gA-G][#b]?/g;
 
         return notes.replace(validNoteRegex, function (match) {
-            return fromNoteToTab(match.toLowerCase(), 1, harmonicaKey.toUpperCase(), defaultFormatting);
+            return fromNoteToTab(match.toLowerCase(), 1, harmonicaKey, defaultFormatting);
         });
     }
 
